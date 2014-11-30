@@ -11,10 +11,10 @@ $saml_settings = array (
     'sp' => array (
         'entityId' => ($sp_entity_id ? $sp_entity_id : 'php-saml'),
         'assertionConsumerService' => array (
-            'url' => JURI::root().'plugins/authentication/oneloginsaml/oneloginsaml.php?acs',
+            'url' => JURI::root().'oneloginsaml.php?acs',
         ),
         'singleLogoutService' => array (
-            'url' => JURI::root().'plugins/authentication/oneloginsaml/oneloginsaml.php?sls',
+            'url' => JURI::root().'oneloginsaml.php?sls',
         ),
         'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified',
         'x509cert' => $saml_params->get('onelogin_saml_advanced_settings_sp_x509cert'),
