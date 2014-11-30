@@ -41,17 +41,20 @@ How to add "SAML Login" link
 
 The "SAML Login" link can be added in at least 2 different places:
 
- * Add the link to the "Login Form module". At the admin interface, click on Extensions > Module Manager and search the
+* Add the link to the "Login Form module". At the admin interface, click on Extensions > Module Manager and search the
    word "Login", in the result you can find the active modules that currently are rendering a Login Form. Edit them and in the
    pre-text add the following:
 
+```
    <a href="http://<path to joomla>/plugins/user/oneloginsaml/oneloginsaml.php?sso">SAML Login</a>
+```
 
- * Add the link to the main login form (Component User, View login). At the admin interface, click on Extensions > Module Manager
+* Add the link to the main login form (Component User, View login). At the admin interface, click on Extensions > Module Manager
    and edit the "Site" templates that are currently used. Click on "Create Overrides" and select at "Components" the "com_users" > "login". Later click on the editor and edit html > com_users > login > default_login.php. You will see the a mix of php and html, search the line around 78 and after the JLOGIN button set:
- 
-   <a href="http://<path to joomla>/plugins/user/oneloginsaml/oneloginsaml.php?sso" style="padding-left:20px;">SAML Login</a>
 
+``` 
+   <a href="http://<path to joomla>/plugins/user/oneloginsaml/oneloginsaml.php?sso" style="padding-left:20px;">SAML Login</a>
+```
 
 Local Login
 -----------
