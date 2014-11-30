@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" method="upgrade" version="3.1">
+    <name>OneLogin SAML Library</name>
+    <author>OneLogin INC.</author>
+    <libraryname>onelogin</libraryname>
+    <authorEmail>support@onelogin.com</authorEmail>
+    <authorUrl>onelogin.com</authorUrl>
+    <creationDate>November 2014</creationDate>
+    <copyright>Copyright (C) 2014 Onelogin Inc. All rights reserved.</copyright>
+    <license>MIT</license>
+    <files>
+        <file>_toolkit_loader.php</file>
+        <file>settings.php</file>
+        <file>init.php</file>
+        <folder>certs</folder>
+        <folder>extlib</folder>
+        <folder>lib</folder>
+    </files>
+</extension>
