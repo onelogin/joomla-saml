@@ -4,10 +4,10 @@
 	<author>OneLogin INC.</author>
 	<authorEmail>support@onelogin.com</authorEmail>
 	<authorUrl>onelogin.com</authorUrl>
-	<creationDate>November 2014</creationDate>
-	<copyright>Copyright (C) 2014 Onelogin Inc. All rights reserved.</copyright>
+	<creationDate>June 2015</creationDate>
+	<copyright>Copyright (C) 2014-2015 Onelogin Inc. All rights reserved.</copyright>
 	<license>MIT</license>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<description>PLG_ONELOGIN_SAML_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="oneloginsaml">oneloginsaml.php</filename>
