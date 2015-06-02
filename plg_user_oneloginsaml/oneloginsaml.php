@@ -184,13 +184,13 @@ if (!defined('_JEXEC')) {
                 $app->redirect($login_url, $response->message, 'error');
             }
         } else {
+            $user = JUser::getInstance($result->id);
+
             // User found, check if data should be update
             $autoupdate = $plgParams->get('onelogin_saml_updateuser');
 
             if ($autoupdate) {
                 // TODO Update
-                $user = JUser::getInstance($result->id);
-
                 if (isset($name) && !empty($name)) {
                     $user->set('name', $name);
                     $user->save();
