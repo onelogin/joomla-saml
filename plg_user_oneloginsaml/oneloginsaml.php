@@ -35,8 +35,8 @@ if (!defined('_JEXEC')) {
         throw new Exception("Onelogin SAML Plugin not active");
     }
 
-    $user =& JFactory::getUser();
-    $session =& JFactory::getSession();
+    $user = JFactory::getUser();
+    $session = JFactory::getSession();
 
     jimport('joomla.html.parameter');
     $plgParams = new JRegistry();
@@ -57,7 +57,7 @@ if (!defined('_JEXEC')) {
         $saml_auth->processResponse();
 
         jimport('joomla.user.authentication');
-        $authenticate = & JAuthentication::getInstance();
+        $authenticate = JAuthentication::getInstance();
         $response = new JAuthenticationResponse();
 
         if (!$saml_auth->isAuthenticated()) {
@@ -142,10 +142,10 @@ if (!defined('_JEXEC')) {
                 JModelLegacy::addIncludePath(JPATH_BASE . '/components/com_users/models');
                 $model = JModelLegacy::getInstance('Registration', 'UsersModel');
 
-                $return	= $model->register($data);
+                $return = $model->register($data);
 
                 if ($return === false) {
-                    $errors	= $model->getErrors();
+                    $errors = $model->getErrors();
                     $response->status = JAuthentication::STATUS_FAILURE;
                     $response->message = 'USER NOT EXISTS AND FAILED THE CREATION PROCESS';
                     $app->redirect($login_url, $response->message, 'error');
@@ -246,14 +246,14 @@ if (!defined('_JEXEC')) {
     class PlgUserOneloginsaml extends JPlugin
     {
     /*
-		public function onUserAuthenticate($credentials, $options, &$response)
-		{
-			// We redirect to initiate the SSO Login
-			// $app = JFactory::getApplication();
-			// $sso_url = JURI::base().'plugins/user/oneloginsaml/oneloginsaml.php?sso';
-			// $app->redirect($sso_url);
-		}
-	*/
+        public function onUserAuthenticate($credentials, $options, &$response)
+        {
+            // We redirect to initiate the SSO Login
+            // $app = JFactory::getApplication();
+            // $sso_url = JURI::base().'plugins/user/oneloginsaml/oneloginsaml.php?sso';
+            // $app->redirect($sso_url);
+        }
+    */
         public function onUserLogout($parameters, $options)
         {
             if ($this->params->get('onelogin_saml_slo')) {
