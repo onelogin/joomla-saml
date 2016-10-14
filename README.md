@@ -5,6 +5,8 @@ Joomla 3.3 SAML Authentication plugin based on OneLogin PHP SAML Toolkit.
 
 This plugin enables your Joomla users to log in through SAML.
 
+joomlsa-saml version 1.3.0 updates php-saml library to 2.10.0 (it includes SAML Signature Wrapping attack prevention and other security improvements).
+Previous versions are vulnerable.
 
 Features
 --------
@@ -33,7 +35,7 @@ Settings
 --------
 
 At the admin interface, click on Extensions > Plugin Manager. Search "Onelogin SAML". Click on the name of the plugin. 
-At the "Description" tab you will find info describing the rest of the tabs. Once the settings are set, turn enable the plugin.  
+At the "Description" tab you will find info describing the rest of the tabs. Once the settings are set, turn enable the plugin.
 
 The metadata of the Joomla SP will be available at
 ``` 
