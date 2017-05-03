@@ -66,5 +66,6 @@ $saml_settings = array (
         // Indicates a requirement for the NameID received by
         // this SP to be encrypted.
         'wantNameIdEncrypted' => $saml_params->get('onelogin_saml_advanced_settings_want_assertion_encrypted'),
+        'relaxDestinationValidation' => true,
     ),
 );
