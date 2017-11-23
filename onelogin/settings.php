@@ -6,8 +6,8 @@ defined('_JEXEC') or die;
 $sp_entity_id = $saml_params->get('onelogin_saml_advanced_settings_sp_entity_id');
 
 $saml_settings = array (
-    'strict' => $saml_params->get('onelogin_saml_advanced_settings_debug'),
-    'debug' => $saml_params->get('onelogin_saml_advanced_settings_strict_mode'),
+    'strict' => $saml_params->get('onelogin_saml_advanced_settings_strict_mode'),
+    'debug' => $saml_params->get('onelogin_saml_advanced_settings_debug'),
     'sp' => array (
         'entityId' => ($sp_entity_id ? $sp_entity_id : 'php-saml'),
         'assertionConsumerService' => array (
