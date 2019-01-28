@@ -5,8 +5,8 @@
     <libraryname>onelogin</libraryname>
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
-    <creationDate>November 2014</creationDate>
-    <copyright>Copyright (C) 2014 Onelogin Inc. All rights reserved.</copyright>
+    <creationDate>January 2019</creationDate>
+    <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
     <license>MIT</license>
     <files>
         <file>_toolkit_loader.php</file>

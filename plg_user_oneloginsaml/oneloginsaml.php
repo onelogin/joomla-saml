@@ -3,7 +3,7 @@
  * @package     OneLogin SAML.Plugin
  * @subpackage  User.oneloginsaml
  *
- * @copyright   Copyright (C) 2014 OneLogin, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
  */
 

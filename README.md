@@ -5,6 +5,9 @@ Joomla 3.3 SAML Authentication plugin based on OneLogin PHP SAML Toolkit.
 
 This plugin enables your Joomla users to log in through SAML.
 
+joomlsa-saml version 1.6.0 updates php-saml library to 2.15.0 (it includes XEE attack prevention).
+Previous versions are vulnerable.
+
 joomlsa-saml version 1.3.0 updates php-saml library to 2.10.0 (it includes SAML Signature Wrapping attack prevention and other security improvements).
 Previous versions are vulnerable.
 
