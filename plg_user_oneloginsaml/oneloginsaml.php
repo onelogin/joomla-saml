@@ -7,10 +7,12 @@
  * @license     MIT
  */
 
+/**
+ * Check to see if we're being called directly or in the application.
+*/
 if (!defined('_JEXEC')) {
     /**
-     * Constant that is checked in included files to prevent direct access.
-     * define() is used in the installation folder rather than "const" to not error for PHP 5.2 and lower
+     * We're being called directly, load the Joomla Env
      */
     define('_JEXEC', 1);
 
@@ -29,38 +31,51 @@ if (!defined('_JEXEC')) {
     $app->initialise();
     $login_url = JRoute::_('../../../index.php?option=com_users&view=login', true);
 
+    //try to load the plugin
     $oneLoginPlugin = JPluginHelper::getPlugin('user', 'oneloginsaml');
 
+    //sanity check
     if (!$oneLoginPlugin) {
         throw new Exception("Onelogin SAML Plugin not active");
     }
 
+    //import user and session info
     $user = JFactory::getUser();
     $session = JFactory::getSession();
 
+    //load plugin parameters
     jimport('joomla.html.parameter');
     $plgParams = new JRegistry();
     if ($oneLoginPlugin && isset($oneLoginPlugin->params)) {
         $plgParams->loadString($oneLoginPlugin->params);
     }
 
+    //see if we're in debug mode
     $debug = $plgParams->get('onelogin_saml_advanced_settings_debug');
 
+    //import the onelogin library and pass the settings
     jimport('onelogin.init');
     $saml_auth = onelogin_saml_instance($plgParams);
 
+    //decide what direct function is required
     if (isset($_GET['sso'])) {
+        //login required redirect to the idp
         $saml_auth->login();
     } else if (isset($_GET['slo'])) {
+        //logout required redirect to the idp
         $saml_auth->logout();
     } else if (isset($_GET['acs'])) {
+        //IDP response
         $saml_auth->processResponse();
 
+        //import the user authentication class
         jimport('joomla.user.authentication');
         $authenticate = JAuthentication::getInstance();
         $response = new JAuthenticationResponse();
 
+        //check to see if the user is authenticated to the idp
         if (!$saml_auth->isAuthenticated()) {
+            //user is not generate an error and redirect
             $msg_error = 'NO_AUTHENTICATED';
             $errors = $saml_auth->getErrors();
 
@@ -71,12 +86,14 @@ if (!defined('_JEXEC')) {
             $response->message = $msg_error;
             $app->redirect($login_url, $response->message, 'error');
         }
+        
+        //user is logged in, load the user
         $attrs = $saml_auth->getAttributes();
 
         $username = '';
         $email = '';
         $name = '';
-
+        
         if (empty($attrs)) {
             $username = $saml_auth->getNameId();
             $email = $username;
@@ -101,6 +118,7 @@ if (!defined('_JEXEC')) {
             }
         }
 
+        //pull in and verify our matching feild has data
         $matcher = $plgParams->get('onelogin_saml_account_matcher', 'username');
 
 
@@ -115,6 +133,7 @@ if (!defined('_JEXEC')) {
             $app->redirect($login_url, $response->message, 'error');
         }
 
+        //try to load the user from the joomla table
         $result = get_user_from_joomla($matcher, $username, $email);
 
         if (!$result) {
@@ -179,18 +198,21 @@ if (!defined('_JEXEC')) {
 
                 $app->redirect($login_url, "Welcome $user->username", 'message');
             } else {
+                //User didn't exist and we're not allowed to create
+                //generate error and redirect
                 $response->status = JAuthentication::STATUS_FAILURE;
                 $response->message = 'USER DOES NOT EXIST AND NOT ALLOWED TO CREATE';
                 $app->redirect($login_url, $response->message, 'error');
             }
         } else {
+            //we found the user, load the user
             $user = JUser::getInstance($result->id);
 
-            // User found, check if data should be update
+            // check if user data should be update
             $autoupdate = $plgParams->get('onelogin_saml_updateuser');
 
             if ($autoupdate) {
-                // TODO Update
+                /** @TODO Update */
                 if (isset($name) && !empty($name)) {
                     $user->set('name', $name);
                     $user->save();
@@ -202,7 +224,7 @@ if (!defined('_JEXEC')) {
                     $user->save();
                 }
             }
-
+            //we're done authenticating, set the user and session and redirect
             $response->status == JAuthentication::STATUS_SUCCESS;
             $session->set('user', $user);
 
@@ -213,15 +235,17 @@ if (!defined('_JEXEC')) {
         }
 
     } else if (isset($_GET['sls'])) {
+        // logout 
         $saml_auth->processSLO();
         $errors = $saml_auth->getErrors();
         if (empty($errors)) {
-            // TODO Do local logout
+            /** @TODO Do local logout */
             $app->redirect($login_url, 'Sucessfully logged out', 'message');
         } else {
             $app->redirect($login_url, implode(', ', $errors), 'error');
         }
     } else if (isset($_GET['metadata'])) {
+        //print our settings and exit
         $settings = $saml_auth->getSettings();
         $metadata = $settings->getSPMetadata();
         $errors = $settings->validateMetadata($metadata);
@@ -235,6 +259,7 @@ if (!defined('_JEXEC')) {
             );
         }
     } else {
+        //we were't given a valid todo, throw an error
         throw new Exception("No action selected, set one of those GET parameters: 'sso', 'slo', 'acs', 'sls' or 'metadata' .");
     }
 
