@@ -39,10 +39,11 @@ class OneLogin_Saml2_LogoutRequest
      * @param string|null $sessionIndex The SessionIndex (taken from the SAML Response in the SSO process).
      * @param string|null $nameIdFormat The NameID Format will be set in the LogoutRequest.
      * @param string|null $nameIdNameQualifier The NameID NameQualifier will be set in the LogoutRequest.
+     * @param string|null             $nameIdSPNameQualifier The NameID SP NameQualifier will be set in the LogoutRequest.
      *
      * @throws OneLogin_Saml2_Error
      */
-    public function __construct(OneLogin_Saml2_Settings $settings, $request = null, $nameId = null, $sessionIndex = null, $nameIdFormat = null, $nameIdNameQualifier = null)
+    public function __construct(OneLogin_Saml2_Settings $settings, $request = null, $nameId = null, $sessionIndex = null, $nameIdFormat = null, $nameIdNameQualifier = null, $nameIdSPNameQualifier = null)
     {
         $this->_settings = $settings;
 
@@ -59,7 +60,6 @@ class OneLogin_Saml2_LogoutRequest
             $id = OneLogin_Saml2_Utils::generateUniqueID();
             $this->id = $id;
 
-            $nameIdValue = OneLogin_Saml2_Utils::generateUniqueID();
             $issueInstant = OneLogin_Saml2_Utils::parseTime2SAML(time());
 
             $cert = null;
@@ -78,16 +78,26 @@ class OneLogin_Saml2_LogoutRequest
                   $spData['NameIDFormat'] != OneLogin_Saml2_Constants::NAMEID_UNSPECIFIED) {
                     $nameIdFormat = $spData['NameIDFormat'];
                 }
-                $spNameQualifier = null;
             } else {
                 $nameId = $idpData['entityId'];
                 $nameIdFormat = OneLogin_Saml2_Constants::NAMEID_ENTITY;
-                $spNameQualifier = $spData['entityId'];
+            }
+
+            /* From saml-core-2.0-os 8.3.6, when the entity Format is used:
+               "The NameQualifier, SPNameQualifier, and SPProvidedID attributes MUST be omitted.
+            */
+            if (!empty($nameIdFormat) && $nameIdFormat == OneLogin_Saml2_Constants::NAMEID_ENTITY) {
+                $nameIdNameQualifier = null;
+                $nameIdSPNameQualifier = null;
+            }
+             // NameID Format UNSPECIFIED omitted
+            if (!empty($nameIdFormat) && $nameIdFormat == OneLogin_Saml2_Constants::NAMEID_UNSPECIFIED) {
+                $nameIdFormat = null;
             }
 
             $nameIdObj = OneLogin_Saml2_Utils::generateNameId(
                 $nameId,
-                $spNameQualifier,
+                $nameIdSPNameQualifier,
                 $nameIdFormat,
                 $cert,
                 $nameIdNameQualifier
@@ -330,7 +340,7 @@ LOGOUTREQUEST;
                 $security = $this->_settings->getSecurityData();
 
                 if ($security['wantXMLValidation']) {
-                    $res = OneLogin_Saml2_Utils::validateXML($dom, 'saml-schema-protocol-2.0.xsd', $this->_settings->isDebugActive());
+                    $res = OneLogin_Saml2_Utils::validateXML($dom, 'saml-schema-protocol-2.0.xsd', $this->_settings->isDebugActive(), $this->_settings->getSchemasPath());
                     if (!$res instanceof DOMDocument) {
                         throw new OneLogin_Saml2_ValidationError(
                             "Invalid SAML Logout Request. Not match the saml-schema-protocol-2.0.xsd",
@@ -355,11 +365,26 @@ LOGOUTREQUEST;
                 // Check destination
                 if ($dom->documentElement->hasAttribute('Destination')) {
                     $destination = $dom->documentElement->getAttribute('Destination');
-                    if (!empty($destination) && strpos($destination, $currentURL) === false) {
-                        throw new OneLogin_Saml2_ValidationError(
-                            "The LogoutRequest was received at $currentURL instead of $destination",
-                            OneLogin_Saml2_ValidationError::WRONG_DESTINATION
-                        );
+                    if (empty($destination)) {
+                        if (!$security['relaxDestinationValidation']) {
+                            throw new OneLogin_Saml2_ValidationError(
+                                "The LogoutRequest has an empty Destination value",
+                                OneLogin_Saml2_ValidationError::EMPTY_DESTINATION
+                            );
+                        }
+                    } else {
+                        $urlComparisonLength = $security['destinationStrictlyMatches'] ? strlen($destination) : strlen($currentURL);
+                        if (strncmp($destination, $currentURL, $urlComparisonLength) !== 0) {
+                            $currentURLNoRouted = OneLogin_Saml2_Utils::getSelfURLNoQuery();
+                            $urlComparisonLength = $security['destinationStrictlyMatches'] ? strlen($destination) : strlen($currentURLNoRouted);
+
+                            if (strncmp($destination, $currentURLNoRouted, $urlComparisonLength) !== 0) {
+                                throw new OneLogin_Saml2_ValidationError(
+                                    "The LogoutRequest was received at $currentURL instead of $destination",
+                                    OneLogin_Saml2_ValidationError::WRONG_DESTINATION
+                                );
+                            }
+                        }
                     }
                 }
 
