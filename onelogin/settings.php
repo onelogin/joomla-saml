@@ -16,7 +16,7 @@ $saml_settings = array (
         'singleLogoutService' => array (
             'url' => JURI::root().'oneloginsaml.php?sls',
         ),
-        'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified',
+        'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
         'x509cert' => $saml_params->get('onelogin_saml_advanced_settings_sp_x509cert'),
         'privateKey' => $saml_params->get('onelogin_saml_advanced_settings_sp_privatekey'),
     ),
