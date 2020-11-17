@@ -6,6 +6,7 @@
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
     <creationDate>January 2019</creationDate>
+    <version>3.4.1</version>
     <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
     <license>MIT</license>
     <files>
