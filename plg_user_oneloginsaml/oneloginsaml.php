@@ -131,7 +131,7 @@ if (!defined('_JEXEC')) {
                 $data['name'] = (isset($name) && !empty($name)) ? $name : $username;
                 $data['username'] = $username;
                 $data['email'] = $data['email1'] = $data['email2'] = JStringPunycode::emailToPunycode($email);
-                $data['password'] = $data['password1'] = $data['password2'] = JUserHelper::genRandomPassword();
+                $data['password'] = $data['password1'] = $data['password2'] = NULL;
 
                 // Get the model and validate the data.
                 jimport('joomla.application.component.model');
@@ -152,7 +152,7 @@ if (!defined('_JEXEC')) {
                     $app->redirect($login_url, $response->message, 'error');
                 }
 
-                $result = get_user_from_joomla($matcher, $username, $email);
+                $result = $saml_auth->get_user_from_joomla($matcher, $username, $email);
 
                 $user = JUser::getInstance($result->id);
 
@@ -161,7 +161,7 @@ if (!defined('_JEXEC')) {
                 $user->save();
 
 
-                $groups = get_mapped_groups($plgParams, $saml_groups);
+                $groups = $saml_auth->get_mapped_groups($plgParams, $saml_groups);
                 if (empty($groups)) {
                     $params = JComponentHelper::getParams('com_users');
                     // Get the default new user group, Registered if not specified.
