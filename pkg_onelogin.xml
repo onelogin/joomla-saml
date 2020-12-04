@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
+ @license     MIT
+ @author Michael Andrzejewski <michael@jetskitechnologies.com>
+-->
+ <extension type="package" version="1.6" method="upgrade">
+ <name>OneLogin PHP-SAML Joomla! Implementiation</name>
+ <author>OneLogin INC.</author>
+ <creationDate>January 2019</creationDate>
+ <packagename>oneloginphpsamljoomla</packagename>
+ <version>1.6.0</version>
+ <url>http://www.onelogin.com</url>
+ <packager>OneLogin INC.</packager>
+ <packagerurl>ttp://www.onelogin.com</packagerurl>
+ <description>OneLogin PHP SAML Joomla Implementation Package</description>
+ <update>https://github.com/onelogin/joomla-saml</update>
+ <files>
+   <file type="library" id="onelogin" >onelogin.zip</file>
+   <file type="plugin" id="plg_system_oneloginsaml" group="system">plg_system_onelogin.zip</file>
+   <file type="plugin" id="plg_user_oneloginsaml" group="user">plg_user_oneloginsaml.zip</file>
+ </files>
+ </extension>

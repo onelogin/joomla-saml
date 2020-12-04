@@ -31,7 +31,7 @@ Installation
 ------------
 
 At the admin interface, click on Extensions > Extension Manager. 
-plg_user_oneloginsaml.zip (the plugin) and onelogin.zip (the library) must be installed.
+Unlike previous versions there is now a single pkg_onelogin_php-saml_joomla.zip to upload and install.
 
 
 Settings

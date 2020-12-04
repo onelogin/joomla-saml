@@ -1,5 +1,5 @@
 <extension type="plugin" group="system" method="upgrade">
-    <name>OneLogin SAML Library Loader</name>
+    <name>plg_system_oneloginsaml</name>
     <author>OneLogin INC.</author>
     <libraryname>onelogin</libraryname>
     <authorEmail>support@onelogin.com</authorEmail>
