@@ -17,4 +17,7 @@
         <folder>extlib</folder>
         <folder>lib</folder>
     </files>
+    <updateservers>
+        <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>
+    </updateservers>
 </extension>
