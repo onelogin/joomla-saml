@@ -7,5 +7,6 @@ push a new release as an update to the general public.
 -->
  <extensionset name="OneLogin PHP-SAML Joomla" description="OneLogin PHP-SAML Joomla">
     <extension name="OneLogin PHP-SAML Joomla User Plugin" element="plg_user_oneloginsaml" type="plugin" version="1.6.0" detailsurl="https://raw.githubusercontent.com/onelogin/joomla-saml/1.6.0/updater_plg_user_oneloginsaml.xml"/>
+    <extension name="OneLogin PHP-SAML Joomla System Plugin" element="plg_system_oneloginsaml" type="plugin" version="1.6.0" detailsurl="https://raw.githubusercontent.com/onelogin/joomla-saml/1.6.0/updater_plg_system_oneloginsaml.xml"/>
     <extension name="OneLogin PHP-SAML Joomla Library" element="OneLogin SAML Library" type="library" version="3.4.1" detailsurl="https://raw.githubusercontent.com/onelogin/joomla-saml/1.6.0/updater_onelogin.xml"/>
  </extensionset>
