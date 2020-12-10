@@ -31,13 +31,14 @@ Installation
 ------------
 
 At the admin interface, click on Extensions > Extension Manager. 
-plg_user_oneloginsaml.zip (the plugin) and onelogin.zip (the library) must be installed.
+Unlike previous versions there is now a single pkg_onelogin_php-saml_joomla.zip to upload and install.
 
 
 Settings
 --------
 
-At the admin interface, click on Extensions > Plugin Manager. Search "Onelogin SAML". Click on the name of the plugin. 
+At the admin interface, click on Extensions > Plugin Manager. Search "Onelogin". 
+Enable both plugins by clicking on the applicable boxes. Click on the name of the user plugin. 
 At the "Description" tab you will find info describing the rest of the tabs. Once the settings are set, turn enable the plugin.
 
 The metadata of the Joomla SP will be available at

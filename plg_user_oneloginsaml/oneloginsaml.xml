@@ -1,385 +1,388 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.3" type="plugin" group="user" method="upgrade">
-	<name>plg_user_oneloginsaml</name>
-	<author>OneLogin INC.</author>
-	<authorEmail>support@onelogin.com</authorEmail>
-	<authorUrl>onelogin.com</authorUrl>
-	<creationDate>January 2019</creationDate>
-	<copyright>Copyright (C) 2014-2019 Onelogin Inc. All rights reserved.</copyright>
-	<license>MIT</license>
-	<version>1.6.0</version>
-	<description>PLG_ONELOGIN_SAML_XML_DESCRIPTION</description>
-	<files>
-		<filename plugin="oneloginsaml">oneloginsaml.php</filename>
-		<filename>index.html</filename>
-		<folder>language</folder>
-	</files>
-	<languages>
-		<language tag="en-GB">language/en-GB/en-GB.plg_user_oneloginsaml.ini</language>
-		<language tag="en-GB">language/en-GB/en-GB.plg_user_oneloginsaml.sys.ini</language>
-	</languages>
-	<config>
-		<fields name="params">
-			<fieldset name="idp">
-				<field name="onelogin_saml_idp_entityid" type="text"
-					label="PLG_ONELOGIN_SAML_IDP_ENTITY_LABEL"
-					description="PLG_ONELOGIN_SAML_IDP_ENTITY_DEC"
-					size="40"
-					default=""
-				/>
-				<field name="onelogin_saml_idp_sso" type="text"
-					label="PLG_ONELOGIN_SAML_IDP_SSO_LABEL"
-					description="PLG_ONELOGIN_SAML_IDP_SSO_DEC"
-					size="40"
-					default=""
-				/>
-				<field name="onelogin_saml_idp_slo" type="text"
-					label="PLG_ONELOGIN_SAML_IDP_SLO_LABEL"
-					description="PLG_ONELOGIN_SAML_IDP_SLO_DEC"
-					size="40"
-					default=""
-				/>
-				<field name="onelogin_saml_idp_x509cert" type="textarea"
-					label="PLG_ONELOGIN_SAML_IDP_X509CERT_LABEL"
-					description="PLG_ONELOGIN_SAML_IDP_X509CERT_DEC"
-					rows="8" cols="55"
-					default=""
-				/>
-			</fieldset>
-			<fieldset name="options">
-				<field name="onelogin_saml_autocreate" type="radio"
-					label="PLG_ONELOGIN_SAML_AUTOCREATE_LABEL"
-					description="PLG_ONELOGIN_SAML_AUTOCREATE_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_updateuser" type="radio"
-					label="PLG_ONELOGIN_SAML_UPDATEUSER_LABEL"
-					description="PLG_ONELOGIN_SAML_UPDATEUSER_DEC"
-					default="0" 
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_slo" type="radio"
-					label="PLG_ONELOGIN_SAML_SLO_LABEL"
-					description="PLG_ONELOGIN_SAML_SLO_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_account_matcher" type="radio"
-					label="PLG_ONELOGIN_SAML_ACCOUNT_MATCHER_LABEL"
-					description="PLG_ONELOGIN_SAML_ACCOUNT_MATCHER_DEC"
-					default="username"
-				>
-					<option value="username">Username</option>
-  				  	<option value="mail">E-Mail</option>
-				</field>
-			</fieldset>
-			<fieldset name="attrs_mapping">
-				<field name="onelogin_saml_attr_mapping_name" type="text"
-					label="PLG_ONELOGIN_SAML_ATTR_MAPPING_NAME_LABEL"
-					description="PLG_ONELOGIN_SAML_ATTR_MAPPING_NAME_DEC"
-					size="40"
-					default=""
-				/>
-				<field name="onelogin_saml_attr_mapping_username" type="text"
-					label="PLG_ONELOGIN_SAML_ATTR_MAPPING_USERNAME_LABEL"
-					description="PLG_ONELOGIN_SAML_ATTR_MAPPING_USERNAME_DEC"
-					size="40"
-					default=""
-				/>
-				<field name="onelogin_saml_attr_mapping_mail" type="text"
-					label="PLG_ONELOGIN_SAML_ATTR_MAPPING_MAIL_LABEL"
-					description="PLG_ONELOGIN_SAML_ATTR_MAPPING_MAIL_DEC"
-					size="40"
-					default=""
-				/>
-				<field name="onelogin_saml_attr_mapping_groups" type="text"
-					label="PLG_ONELOGIN_SAML_ATTR_MAPPING_GROUPS_LABEL"
-					description="PLG_ONELOGIN_SAML_ATTR_MAPPING_GROUPS_DEC"
-					size="40"
-					default=""
-				/>
-			</fieldset>
-			<fieldset name="group_mapping">
-				<field name="group1" type="usergroup"
-					label="Group1"
-					multiple="false"
-				/>
-				<field name="group1_map" type="text"
-					label="Group1 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group2" type="usergroup"
-					label="Group2"
-					multiple="false"
-				/>
-				<field name="group2_map" type="text"
-					label="Group2 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group3" type="usergroup"
-					label="Group3"
-					multiple="false"
-				/>
-				<field name="group3_map" type="text"
-					label="Group3 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group4" type="usergroup"
-					label="Group4"
-					multiple="false"
-				/>
-				<field name="group4_map" type="text"
-					label="Group4 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group5" type="usergroup"
-					label="Group5"
-					multiple="false"
-				/>
-				<field name="group5_map" type="text"
-					label="Group5 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group6" type="usergroup"
-					label="Group6"
-					multiple="false"
-				/>
-				<field name="group6_map" type="text"
-					label="Group6 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group7" type="usergroup"
-					label="Group7"
-					multiple="false"
-				/>
-				<field name="group7_map" type="text"
-					label="Group7 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group8" type="usergroup"
-					label="Group8"
-					multiple="false"
-				/>
-				<field name="group8_map" type="text"
-					label="Group8 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group9" type="usergroup"
-					label="Group9"
-					multiple="false"
-				/>
-				<field name="group9_map" type="text"
-					label="Group9 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group10" type="usergroup"
-					label="Group10"
-					multiple="false"
-				/>
-				<field name="group10_map" type="text"
-					label="Group10 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group11" type="usergroup"
-					label="Group11"
-					multiple="false"
-				/>
-				<field name="group11_map" type="text"
-					label="Group11 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group12" type="usergroup"
-					label="Group12"
-					multiple="false"
-				/>
-				<field name="group12_map" type="text"
-					label="Group12 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group13" type="usergroup"
-					label="Group13"
-					multiple="false"
-				/>
-				<field name="group13_map" type="text"
-					label="Group13 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group14" type="usergroup"
-					label="Group14"
-					multiple="false"
-				/>
-				<field name="group14_map" type="text"
-					label="Group14 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group15" type="usergroup"
-					label="Group15"
-					multiple="false"
-				/>
-				<field name="group15_map" type="text"
-					label="Group15 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group16" type="usergroup"
-					label="Group16"
-					multiple="false"
-				/>
-				<field name="group16_map" type="text"
-					label="Group16 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group17" type="usergroup"
-					label="Group17"
-					multiple="false"
-				/>
-				<field name="group17_map" type="text"
-					label="Group17 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group18" type="usergroup"
-					label="Group18"
-					multiple="false"
-				/>
-				<field name="group18_map" type="text"
-					label="Group18 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group19" type="usergroup"
-					label="Group19"
-					multiple="false"
-				/>
-				<field name="group19_map" type="text"
-					label="Group19 Mapping"
-					size="40"
-					default=""
-				/>
-				<field name="group20" type="usergroup"
-					label="Group20"
-					multiple="false"
-				/>
-				<field name="group20_map" type="text"
-					label="Group20 Mapping"
-					size="40"
-					default=""
-				/>
-			</fieldset>
-			<fieldset name="advanced">
-				<field name="onelogin_saml_advanced_settings_debug" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_DEBUG_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_DEBUG_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_strict_mode" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_STRICT_MODE_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_STRICT_MODE_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_sp_entity_id" type="text"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_ENTITY_ID_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_ENTITY_ID_DEC"
-					size="40"
-					default=""
-				/>
-				<field name="onelogin_saml_advanced_settings_nameid_encrypted" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_NAMEID_ENCRYPTED_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_NAMEID_ENCRYPTED_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_authn_request_signed" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_AUTHN_REQUEST_SIGNED_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_AUTHN_REQUEST_SIGNED_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_logout_request_signed" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_LOGOUT_REQUEST_SIGNED_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_LOGOUT_REQUEST_SIGNED_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_logout_response_signed" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_LOGOUT_RESPONSE_SIGNED_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_LOGOUT_RESPONSE_SIGNED_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_want_message_signed" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_MESSAGE_SIGNED_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_MESSAGE_SIGNED_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_want_assertion_signed" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_ASSERTION_SIGNED_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_ASSERTION_SIGNED_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_want_assertion_encrypted" type="radio"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_ASSERTION_ENCRYPTED_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_ASSERTION_ENCRYPTED_DEC"
-					default="0"
-				>
-				  <option value="0">No</option>
-  				  <option value="1">Yes</option>
-				</field>
-				<field name="onelogin_saml_advanced_settings_sp_x509cert" type="textarea"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_X509CERT_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_X509CERT_DEC"
-					rows="8" cols="55"
-					default=""
-				/>
-				<field name="onelogin_saml_advanced_settings_sp_privatekey" type="textarea"
-					label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_PRIVATEKEY_LABEL"
-					description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_PRIVATEKEY_DEC"
-					rows="8" cols="55"
-					default=""
-				/>
-			</fieldset>
-		</fields>
-	</config>
+    <name>plg_user_oneloginsaml</name>
+    <author>OneLogin INC.</author>
+    <authorEmail>support@onelogin.com</authorEmail>
+    <authorUrl>onelogin.com</authorUrl>
+    <creationDate>January 2019</creationDate>
+    <copyright>Copyright (C) 2014-2019 Onelogin Inc. All rights reserved.</copyright>
+    <license>MIT</license>
+    <version>1.6.0</version>
+    <description>PLG_ONELOGIN_SAML_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="oneloginsaml">oneloginsaml.php</filename>
+        <filename>index.html</filename>
+        <folder>language</folder>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.plg_user_oneloginsaml.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.plg_user_oneloginsaml.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="idp">
+                <field name="onelogin_saml_idp_entityid" type="text"
+                                       label="PLG_ONELOGIN_SAML_IDP_ENTITY_LABEL"
+                                       description="PLG_ONELOGIN_SAML_IDP_ENTITY_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_idp_sso" type="text"
+                                       label="PLG_ONELOGIN_SAML_IDP_SSO_LABEL"
+                                       description="PLG_ONELOGIN_SAML_IDP_SSO_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_idp_slo" type="text"
+                                       label="PLG_ONELOGIN_SAML_IDP_SLO_LABEL"
+                                       description="PLG_ONELOGIN_SAML_IDP_SLO_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_idp_x509cert" type="textarea"
+                                       label="PLG_ONELOGIN_SAML_IDP_X509CERT_LABEL"
+                                       description="PLG_ONELOGIN_SAML_IDP_X509CERT_DEC"
+                                       rows="8" cols="55"
+                                       default=""
+                />
+            </fieldset>
+            <fieldset name="options">
+                <field name="onelogin_saml_autocreate" type="radio"
+                                       label="PLG_ONELOGIN_SAML_AUTOCREATE_LABEL"
+                                       description="PLG_ONELOGIN_SAML_AUTOCREATE_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_updateuser" type="radio"
+                                       label="PLG_ONELOGIN_SAML_UPDATEUSER_LABEL"
+                                       description="PLG_ONELOGIN_SAML_UPDATEUSER_DEC"
+                                       default="0" 
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_slo" type="radio"
+                                       label="PLG_ONELOGIN_SAML_SLO_LABEL"
+                                       description="PLG_ONELOGIN_SAML_SLO_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_account_matcher" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ACCOUNT_MATCHER_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ACCOUNT_MATCHER_DEC"
+                                       default="username"
+                >
+                    <option value="username">Username</option>
+                    <option value="mail">E-Mail</option>
+                </field>
+            </fieldset>
+            <fieldset name="attrs_mapping">
+                <field name="onelogin_saml_attr_mapping_name" type="text"
+                                       label="PLG_ONELOGIN_SAML_ATTR_MAPPING_NAME_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ATTR_MAPPING_NAME_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_attr_mapping_username" type="text"
+                                       label="PLG_ONELOGIN_SAML_ATTR_MAPPING_USERNAME_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ATTR_MAPPING_USERNAME_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_attr_mapping_mail" type="text"
+                                       label="PLG_ONELOGIN_SAML_ATTR_MAPPING_MAIL_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ATTR_MAPPING_MAIL_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_attr_mapping_groups" type="text"
+                                       label="PLG_ONELOGIN_SAML_ATTR_MAPPING_GROUPS_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ATTR_MAPPING_GROUPS_DEC"
+                                       size="40"
+                                       default=""
+                />
+            </fieldset>
+            <fieldset name="group_mapping">
+                <field name="group1" type="usergroup"
+                                       label="Group1"
+                                       multiple="false"
+                />
+                <field name="group1_map" type="text"
+                                       label="Group1 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group2" type="usergroup"
+                                       label="Group2"
+                                       multiple="false"
+                />
+                <field name="group2_map" type="text"
+                                       label="Group2 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group3" type="usergroup"
+                                       label="Group3"
+                                       multiple="false"
+                />
+                <field name="group3_map" type="text"
+                                       label="Group3 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group4" type="usergroup"
+                                       label="Group4"
+                                       multiple="false"
+                />
+                <field name="group4_map" type="text"
+                                       label="Group4 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group5" type="usergroup"
+                                       label="Group5"
+                                       multiple="false"
+                />
+                <field name="group5_map" type="text"
+                                       label="Group5 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group6" type="usergroup"
+                                       label="Group6"
+                                       multiple="false"
+                />
+                <field name="group6_map" type="text"
+                                       label="Group6 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group7" type="usergroup"
+                                       label="Group7"
+                                       multiple="false"
+                />
+                <field name="group7_map" type="text"
+                                       label="Group7 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group8" type="usergroup"
+                                       label="Group8"
+                                       multiple="false"
+                />
+                <field name="group8_map" type="text"
+                                       label="Group8 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group9" type="usergroup"
+                                       label="Group9"
+                                       multiple="false"
+                />
+                <field name="group9_map" type="text"
+                                       label="Group9 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group10" type="usergroup"
+                                       label="Group10"
+                                       multiple="false"
+                />
+                <field name="group10_map" type="text"
+                                       label="Group10 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group11" type="usergroup"
+                                       label="Group11"
+                                       multiple="false"
+                />
+                <field name="group11_map" type="text"
+                                       label="Group11 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group12" type="usergroup"
+                                       label="Group12"
+                                       multiple="false"
+                />
+                <field name="group12_map" type="text"
+                                       label="Group12 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group13" type="usergroup"
+                                       label="Group13"
+                                       multiple="false"
+                />
+                <field name="group13_map" type="text"
+                                       label="Group13 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group14" type="usergroup"
+                                       label="Group14"
+                                       multiple="false"
+                />
+                <field name="group14_map" type="text"
+                                       label="Group14 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group15" type="usergroup"
+                                       label="Group15"
+                                       multiple="false"
+                />
+                <field name="group15_map" type="text"
+                                       label="Group15 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group16" type="usergroup"
+                                       label="Group16"
+                                       multiple="false"
+                />
+                <field name="group16_map" type="text"
+                                       label="Group16 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group17" type="usergroup"
+                                       label="Group17"
+                                       multiple="false"
+                />
+                <field name="group17_map" type="text"
+                                       label="Group17 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group18" type="usergroup"
+                                       label="Group18"
+                                       multiple="false"
+                />
+                <field name="group18_map" type="text"
+                                       label="Group18 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group19" type="usergroup"
+                                       label="Group19"
+                                       multiple="false"
+                />
+                <field name="group19_map" type="text"
+                                       label="Group19 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="group20" type="usergroup"
+                                       label="Group20"
+                                       multiple="false"
+                />
+                <field name="group20_map" type="text"
+                                       label="Group20 Mapping"
+                                       size="40"
+                                       default=""
+                />
+            </fieldset>
+            <fieldset name="advanced">
+                <field name="onelogin_saml_advanced_settings_debug" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_DEBUG_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_DEBUG_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_strict_mode" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_STRICT_MODE_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_STRICT_MODE_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_sp_entity_id" type="text"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_ENTITY_ID_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_ENTITY_ID_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_advanced_settings_nameid_encrypted" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_NAMEID_ENCRYPTED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_NAMEID_ENCRYPTED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_authn_request_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_AUTHN_REQUEST_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_AUTHN_REQUEST_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_logout_request_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_LOGOUT_REQUEST_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_LOGOUT_REQUEST_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_logout_response_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_LOGOUT_RESPONSE_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_LOGOUT_RESPONSE_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_want_message_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_MESSAGE_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_MESSAGE_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_want_assertion_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_ASSERTION_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_ASSERTION_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_want_assertion_encrypted" type="radio"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_ASSERTION_ENCRYPTED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_WANT_ASSERTION_ENCRYPTED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_sp_x509cert" type="textarea"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_X509CERT_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_X509CERT_DEC"
+                                       rows="8" cols="55"
+                                       default=""
+                />
+                <field name="onelogin_saml_advanced_settings_sp_privatekey" type="textarea"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_PRIVATEKEY_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SP_PRIVATEKEY_DEC"
+                                       rows="8" cols="55"
+                                       default=""
+                />
+            </fieldset>
+        </fields>
+    </config> 
+    <updateservers>
+        <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>
+    </updateservers>
 </extension>
