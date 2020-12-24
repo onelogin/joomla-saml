@@ -4,26 +4,26 @@ This is the Master updater file for the OneLogin PHP-SAML Joomla Repo DO NOT
 UPDATE THIS FILE ON COMMITS WHILE DEVELOPING! Only update this file to 
 push a new release as an update to the general public.
 
---> 
+-->
 <updates>
     <update>
-        <name>OneLogin SAML-PHP Joomla User Plugin</name>
-        <description>OneLogin SAML-PHP Joomla User Plugin</description>
-        <element>plg_user_oneloginsaml</element>
+        <name>OneLogin SAML-PHP Joomla Admin Plugin</name>
+        <description>OneLogin SAML-PHP Joomla Admin Plugin</description>
+        <element>plg_user_oneloginsaml_backend</element>
         <type>plugin</type>
         <folder>user</folder>
         <client>0</client>
         <version>2.0.0</version>
         <infourl title="Release Notes">https://github.com/onelogin/joomla-saml/blob/2.0.0/README.md</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/onelogin/joomla-saml/raw/2.0.0/plg_user_oneloginsaml.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/onelogin/joomla-saml/raw/2.0.0/plg_user_oneloginsaml_backend.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
         </tags>
-        <sha256>43c2283582fb342ff16454ac580cececa5a02c9a31167e5a2ea088bed1a02f89</sha256>
-        <sha384>dcf0c88d2286a288ae9e7d12747bc814edd63278a986f3ab2546e1f651fe999d32172596aa4cc3d79d047405ef04eafd</sha384>
-        <sha512>1a4ea1c2d0c66d196800ca50a1ecf56765c901714a4ff7eb164892db09110ec21df690e3136c2407821e053a9a4064096fd72bb75d809f46ab9187a53909d0f9</sha512>
+        <sha256>436f18810d823a8ba90faaacef7be8d34ba9cc1fd5581ff26758c0bb249ad640</sha256>
+        <sha384>859c438c40c5dabc4d55a962df09da18d3d4d8e3f3a05e8e6b25aad5c29e8ba615b30cf69737ae1a61d9182b081d4343</sha384>
+        <sha512>d11d0a7c1c85af55546ca69d031cf8906d3345f7fcfbf6c961d7bb0a71703ebb8b26f7d011ad1b45a6d35a2ad10cf55675ebe3e971e1f9cde40b82a4539f1e70</sha512>
         <maintainer>OneLogin</maintainer>
         <maintainerurl>https://github.com/onelogin</maintainerurl>
         <section></section>

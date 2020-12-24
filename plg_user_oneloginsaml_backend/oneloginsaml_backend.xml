@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.3" type="plugin" group="user" method="upgrade">
+    <name>plg_user_oneloginsaml_backend</name>
+    <author>OneLogin INC.</author>
+    <authorEmail>support@onelogin.com</authorEmail>
+    <authorUrl>onelogin.com</authorUrl>
+    <creationDate>December 2020</creationDate>
+    <copyright>Copyright (C) 2014-2020 Onelogin Inc. All rights reserved.</copyright>
+    <license>MIT</license>
+    <version>2.0.0</version>
+    <description>PLG_ONELOGIN_SAML_BACKEND_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="oneloginsaml_backend">oneloginsaml_backend.php</filename>
+        <filename>index.html</filename>
+        <filename>saml.php</filename>
+        <folder>language</folder>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.plg_user_oneloginsaml_backend.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.plg_user_oneloginsaml_backend.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="idp">
+                <field name="onelogin_saml_backend_idp_entityid" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_IDP_ENTITY_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_IDP_ENTITY_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_idp_sso" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_IDP_SSO_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_IDP_SSO_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_idp_slo" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_IDP_SLO_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_IDP_SLO_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_idp_x509cert" type="textarea"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_IDP_X509CERT_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_IDP_X509CERT_DEC"
+                                       rows="8" cols="55"
+                                       default=""
+                />
+            </fieldset>
+            <fieldset name="options">
+                <field name="onelogin_saml_backend_autocreate" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_AUTOCREATE_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_AUTOCREATE_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_updateuser" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_UPDATEUSER_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_UPDATEUSER_DEC"
+                                       default="0" 
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_require_group" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_REQUIRE_GROUP_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_REQUIRE_GROUP_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_default_group" type="usergroup"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_DEFAULT_GROUP_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_DEFAULT_GROUP_DEC"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_slo" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_SLO_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_SLO_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_account_matcher" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ACCOUNT_MATCHER_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ACCOUNT_MATCHER_DEC"
+                                       default="username"
+                >
+                    <option value="username">Username</option>
+                    <option value="mail">E-Mail</option>
+                </field>
+            </fieldset>
+            <fieldset name="attrs_mapping">
+                <field name="onelogin_saml_backend_attr_mapping_name" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ATTR_MAPPING_NAME_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ATTR_MAPPING_NAME_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_attr_mapping_username" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ATTR_MAPPING_USERNAME_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ATTR_MAPPING_USERNAME_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_attr_mapping_mail" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ATTR_MAPPING_MAIL_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ATTR_MAPPING_MAIL_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_attr_mapping_groups" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ATTR_MAPPING_GROUPS_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ATTR_MAPPING_GROUPS_DEC"
+                                       size="40"
+                                       default=""
+                />
+            </fieldset>
+            <fieldset name="group_mapping">
+                <field name="onelogin_saml_backend_group1" type="usergroup"
+                                       label="Group1"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group1_map" type="text"
+                                       label="Group1 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group2" type="usergroup"
+                                       label="Group2"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group2_map" type="text"
+                                       label="Group2 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group3" type="usergroup"
+                                       label="Group3"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group3_map" type="text"
+                                       label="Group3 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group4" type="usergroup"
+                                       label="Group4"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group4_map" type="text"
+                                       label="Group4 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group5" type="usergroup"
+                                       label="Group5"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group5_map" type="text"
+                                       label="Group5 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group6" type="usergroup"
+                                       label="Group6"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group6_map" type="text"
+                                       label="Group6 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group7" type="usergroup"
+                                       label="Group7"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group7_map" type="text"
+                                       label="Group7 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group8" type="usergroup"
+                                       label="Group8"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group8_map" type="text"
+                                       label="Group8 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group9" type="usergroup"
+                                       label="Group9"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group9_map" type="text"
+                                       label="Group9 Mapping"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_group10" type="usergroup"
+                                       label="Group10"
+                                       multiple="false"
+                                       default="7"
+                />
+                <field name="onelogin_saml_backend_group10_map" type="text"
+                                       label="Group10 Mapping"
+                                       size="40"
+                                       default=""
+                />
+            </fieldset>
+            <fieldset name="advanced">
+                <field name="onelogin_saml_backend_advanced_settings_debug" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_DEBUG_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_DEBUG_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_strict_mode" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_STRICT_MODE_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_STRICT_MODE_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_sp_entity_id" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_SP_ENTITY_ID_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_SP_ENTITY_ID_DEC"
+                                       size="40"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_advanced_settings_nameid_format" type="combo"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_NAMEID_FORMAT_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_NAMEID_FORMAT_DEC"
+                >
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">unspecified</option>
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">emailAddress</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">transient</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent">persistent</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted">encrypted</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos">kerberos</option>
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName">X509SubjectName</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">entity</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_nameid_encrypted" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_NAMEID_ENCRYPTED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_NAMEID_ENCRYPTED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_authn_request_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_AUTHN_REQUEST_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_AUTHN_REQUEST_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_logout_request_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_LOGOUT_REQUEST_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_LOGOUT_REQUEST_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_logout_response_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_LOGOUT_RESPONSE_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_LOGOUT_RESPONSE_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_want_message_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_WANT_MESSAGE_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_WANT_MESSAGE_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_want_assertion_signed" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_WANT_ASSERTION_SIGNED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_WANT_ASSERTION_SIGNED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_want_assertion_encrypted" type="radio"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_WANT_ASSERTION_ENCRYPTED_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_WANT_ASSERTION_ENCRYPTED_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_sp_x509cert" type="textarea"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_SP_X509CERT_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_SP_X509CERT_DEC"
+                                       rows="8" cols="55"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_advanced_settings_sp_privatekey" type="textarea"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_SP_PRIVATEKEY_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_SP_PRIVATEKEY_DEC"
+                                       rows="8" cols="55"
+                                       default=""
+                />
+                <field name="onelogin_saml_backend_advanced_settings_signature_algorithm" type="combo"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_SIGNATURE_ALG_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_SIGNATURE_ALG_DEC"
+                >
+                    <option value="http://www.w3.org/2000/09/xmldsig#rsa-sha1">rsa-sha1</option>
+                    <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256">rsa-sha256</option>
+                    <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha384">rsa-sha384</option>
+                    <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512">rsa-sha512</option>
+                    <option value="http://www.w3.org/2000/09/xmldsig#dsa-sha1">dsa-sha1</option>
+                </field>
+                <field name="onelogin_saml_backend_advanced_settings_digest_algorithm" type="combo"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_DIGEST_ALG_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_ADVANCED_SETTINGS_DIGEST_ALG_DEC"
+                >
+                                        <option value="http://www.w3.org/2000/09/xmldsig#sha1">sha1</option>
+                    <option value="http://www.w3.org/2001/04/xmlenc#sha256">sha256</option>
+                    <option value="http://www.w3.org/2001/04/xmldsig-more#sha384">sha384</option>
+                    <option value="http://www.w3.org/2001/04/xmlenc#sha512">sha512</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config> 
+    <updateservers>
+        <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>
+    </updateservers>
+</extension>

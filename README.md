@@ -5,6 +5,8 @@ Joomla 3.3 SAML Authentication plugin based on OneLogin PHP SAML Toolkit.
 
 This plugin enables your Joomla users to log in through SAML.
 
+joomlsa-saml version 2.0.0 updates php-saml library to 3.5.1 and add support for Admin login
+
 joomlsa-saml version 1.6.0 updates php-saml library to 2.15.0 (it includes XEE attack prevention).
 Previous versions are vulnerable.
 
@@ -18,6 +20,7 @@ Features
 * Single log out
 * Just on time provisioning
 * Supports groups
+* User and Admin Logins
 
 
 Pre-requisites
@@ -45,9 +48,13 @@ The metadata of the Joomla SP will be available at
 ``` 
 http://<path to joomla/plugins/user/oneloginsaml/oneloginsaml.php?metadata
 ```
+and for the Backend:
+``` 
+http://<path to joomla/plugins/user/oneloginsaml_backend/oneloginsaml_backend.php?metadata
+```
 
-How to add "SAML Login" link
-----------------------------
+How to add "SAML Login" link to the User Login
+----------------------------------------------
 
 The "SAML Login" link can be added in at least 2 different places:
 
@@ -59,15 +66,36 @@ The "SAML Login" link can be added in at least 2 different places:
    <a href="http://<path to joomla>/plugins/user/oneloginsaml/oneloginsaml.php?sso">SAML Login</a>
 ```
 
-* Add the link to the main login form (Component User, View login). At the admin interface, click on Extensions > Module Manager
-   and edit the "Site" templates that are currently used. Click on "Create Overrides" and select at "Components" the "com_users" > "login". Later click on the editor and edit html > com_users > login > default_login.php. You will see the a mix of php and html, search the line around 78 and after the JLOGIN button set:
+* The SAML Link at the main login form is handled by a flag of the option section of the OneLogin plugin
 
-``` 
-   <a href="http://<path to joomla>/plugins/user/oneloginsaml/oneloginsaml.php?sso" style="padding-left:20px;">SAML Login</a>
+
+How to add "SAML Login" link to the Admin Login
+-----------------------------------------------
+
+At the admin interface, click on Extensions > Templates > Template. Switch to the Administrator templates. Select
+the one you are using. Edit the login.php file:
+
+After the line 122:
 ```
+<jdoc:include type="component" />
+```
+Add:
+```
+<?php echo '<div ><center><hr><a class="btn btn-primary" href="'.JRoute::_(JUri::root().'plugins/user/oneloginsaml_backend/oneloginsaml_backend.php?sso', true).'">SAML Login</a><hr></center></div>'; ?>
+```
+
 
 Local Login
 -----------
 
 When SAML enabled, you can always continue login through other login backends.
 Maybe we will disable the local login in future but will provide a way to rescue the system in case that something go wrong with SAML.
+
+Contributors
+------------
+
+- Michael Andrzejewski <michael@jetskitechnologies.com>
+  Refactored and packetized the plugins.
+
+- Université du Québec à Montréal. 
+  Sponsored backend integration.

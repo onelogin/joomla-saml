@@ -4,14 +4,15 @@
     <author>OneLogin INC.</author>
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
-    <creationDate>January 2019</creationDate>
-    <copyright>Copyright (C) 2014-2019 Onelogin Inc. All rights reserved.</copyright>
+    <creationDate>December 2020</creationDate>
+    <copyright>Copyright (C) 2014-2020 Onelogin Inc. All rights reserved.</copyright>
     <license>MIT</license>
-    <version>1.6.0</version>
+    <version>2.0.0</version>
     <description>PLG_ONELOGIN_SAML_XML_DESCRIPTION</description>
     <files>
         <filename plugin="oneloginsaml">oneloginsaml.php</filename>
         <filename>index.html</filename>
+        <filename>saml.php</filename>
         <folder>language</folder>
     </files>
     <languages>
@@ -78,6 +79,14 @@
                 >
                     <option value="username">Username</option>
                     <option value="mail">E-Mail</option>
+                </field>
+                <field name="onelogin_saml_inject_login" type="radio"
+                                       label="PLG_ONELOGIN_SAML_INJECT_LOGIN_LINK_LABEL"
+                                       description="PLG_ONELOGIN_SAML_INJECT_LOGIN_LINK_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
                 </field>
             </fieldset>
             <fieldset name="attrs_mapping">
@@ -311,6 +320,19 @@
                                        size="40"
                                        default=""
                 />
+                <field name="onelogin_saml_advanced_settings_nameid_format" type="combo"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_NAMEID_FORMAT_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_NAMEID_FORMAT_DEC"
+                >
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">unspecified</option>
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">emailAddress</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">transient</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent">persistent</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted">encrypted</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos">kerberos</option>
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName">X509SubjectName</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">entity</option>
+                </field>
                 <field name="onelogin_saml_advanced_settings_nameid_encrypted" type="radio"
                                        label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_NAMEID_ENCRYPTED_LABEL"
                                        description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_NAMEID_ENCRYPTED_DEC"
@@ -379,7 +401,32 @@
                                        rows="8" cols="55"
                                        default=""
                 />
+                <field name="onelogin_saml_advanced_settings_signature_algorithm" type="combo"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SIGNATURE_ALG_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_SIGNATURE_ALG_DEC"
+                >
+                    <option value="http://www.w3.org/2000/09/xmldsig#rsa-sha1">rsa-sha1</option>
+                    <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256">rsa-sha256</option>
+                    <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha384">rsa-sha384</option>
+                    <option value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512">rsa-sha512</option>
+                    <option value="http://www.w3.org/2000/09/xmldsig#dsa-sha1">dsa-sha1</option>
+                </field>
+                <field name="onelogin_saml_advanced_settings_digest_algorithm" type="combo"
+                                       label="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_DIGEST_ALG_LABEL"
+                                       description="PLG_ONELOGIN_SAML_ADVANCED_SETTINGS_DIGEST_ALG_DEC"
+                >
+                    <option value="http://www.w3.org/2000/09/xmldsig#sha1">sha1</option>
+                    <option value="http://www.w3.org/2001/04/xmlenc#sha256">sha256</option>
+                    <option value="http://www.w3.org/2001/04/xmldsig-more#sha384">sha384</option>
+                    <option value="http://www.w3.org/2001/04/xmlenc#sha512">sha512</option>
+                </field>
             </fieldset>
+<!--
+            <fieldset name="metadata">
+              <field name="onelogin_saml_metadata" type="metadata">
+              </field>
+            </fieldset>
+-->
         </fields>
     </config> 
     <updateservers>

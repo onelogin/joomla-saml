@@ -5,16 +5,15 @@
     <libraryname>onelogin</libraryname>
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
-    <creationDate>January 2019</creationDate>
-    <version>3.4.1</version>
-    <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
+    <creationDate>December 2020</creationDate>
+    <version>3.5.1</version>
+    <copyright>Copyright (C) 2020 Onelogin Inc. All rights reserved.</copyright>
     <license>MIT</license>
     <files>
         <filename>loader.php</filename>
         <filename>onelogin.xml</filename>
-        <folder>certs</folder>
-        <folder>extlib</folder>
-        <folder>lib</folder>
+        <filename>saml_joomla.php</filename>
+        <folder>vendor</folder>
     </files>
     <updateservers>
         <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>
