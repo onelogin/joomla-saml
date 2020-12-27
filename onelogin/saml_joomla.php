@@ -1,7 +1,6 @@
 <?php
 /**
- * @package     OneLogin SAML.Plugin
- * @subpackage  User.oneloginsaml
+ * @package     OneLogin SAML.Library
  *
  * @copyright   Copyright (C) 2020 OneLogin, Inc. All rights reserved.
  * @license     MIT
@@ -45,22 +44,22 @@ class Saml_Joomla {
     protected function formatSettings() {
         $urlBase = JUri::base();
         $urlBase = str_replace("administrator/", "" , $urlBase);
-        $urlBase = str_replace("plugins/user/oneloginsaml_backend/", "" , $urlBase);
-        $urlBase = str_replace("plugins/user/oneloginsaml/", "", $urlBase);
+        $urlBase = str_replace("plugins/system/oneloginsaml_backend/", "" , $urlBase);
+        $urlBase = str_replace("plugins/system/oneloginsaml/", "", $urlBase);
         
         if ($this->plugin == 'onelogin_saml') {
-            $defaultSPEntityId = $urlBase . 'plugins/user/oneloginsaml/oneloginsaml.php?metadata';
-            $acsUrl = $urlBase . 'plugins/user/oneloginsaml/oneloginsaml.php?acs';
-            $slsUrl = $urlBase . 'plugins/user/oneloginsaml/oneloginsaml.php?sls';
+            $defaultSPEntityId = $urlBase . 'plugins/system/oneloginsaml/oneloginsaml.php?metadata';
+            $acsUrl = $urlBase . 'plugins/system/oneloginsaml/oneloginsaml.php?acs';
+            $slsUrl = $urlBase . 'plugins/system/oneloginsaml/oneloginsaml.php?sls';
         } else {
-            $defaultSPEntityId = $urlBase . 'plugins/user/oneloginsaml_backend/oneloginsaml_backend.php?metadata';
-            $acsUrl = $urlBase . 'plugins/user/oneloginsaml_backend/oneloginsaml_backend.php?acs';
-            $slsUrl = $urlBase . 'plugins/user/oneloginsaml_backend/oneloginsaml_backend.php?sls';
+            $defaultSPEntityId = $urlBase . 'plugins/system/oneloginsaml_backend/oneloginsaml_backend.php?metadata';
+            $acsUrl = $urlBase . 'plugins/system/oneloginsaml_backend/oneloginsaml_backend.php?acs';
+            $slsUrl = $urlBase . 'plugins/system/oneloginsaml_backend/oneloginsaml_backend.php?sls';
         }
 
         return [
             'strict' => $this->get_config_parameter('advanced_settings_strict_mode'),
-            'debug' => $this->get_config_parameter('advanced_settings_debug'),
+            'debug' => false,
             'sp' => [
                 'entityId' => $this->get_config_parameter('advanced_settings_sp_entity_id', $defaultSPEntityId),
                 'assertionConsumerService' => [

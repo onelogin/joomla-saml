@@ -9,21 +9,21 @@ push a new release as an update to the general public.
     <update>
         <name>OneLogin SAML-PHP Joomla Admin Plugin</name>
         <description>OneLogin SAML-PHP Joomla Admin Plugin</description>
-        <element>plg_user_oneloginsaml_backend</element>
+        <element>plg_system_oneloginsaml_backend</element>
         <type>plugin</type>
-        <folder>user</folder>
+        <folder>system</folder>
         <client>0</client>
         <version>2.0.0</version>
         <infourl title="Release Notes">https://github.com/onelogin/joomla-saml/blob/2.0.0/README.md</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/onelogin/joomla-saml/raw/2.0.0/plg_user_oneloginsaml_backend.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/onelogin/joomla-saml/raw/2.0.0/plg_system_oneloginsaml_backend.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
         </tags>
-        <sha256>436f18810d823a8ba90faaacef7be8d34ba9cc1fd5581ff26758c0bb249ad640</sha256>
-        <sha384>859c438c40c5dabc4d55a962df09da18d3d4d8e3f3a05e8e6b25aad5c29e8ba615b30cf69737ae1a61d9182b081d4343</sha384>
-        <sha512>d11d0a7c1c85af55546ca69d031cf8906d3345f7fcfbf6c961d7bb0a71703ebb8b26f7d011ad1b45a6d35a2ad10cf55675ebe3e971e1f9cde40b82a4539f1e70</sha512>
+        <sha256>67578e89a68052933ea7de418932f4eab0d01da3ca114a05da92653d6b8c24e2</sha256>
+        <sha384>caef50e7dcf8eb1f0b36c4fcb1689166cc374603bc68316d6a443ccab136bf5524f18188ce6f7700006e16dde510e408</sha384>
+        <sha512>da9a1915602b35c22780fc0683327e1c3cced5d16dc590230925bf10cada09692336c97313efd1eba41fd85fdb024f1b5e759d3cb9a80a4a60dbd49b6760229e</sha512>
         <maintainer>OneLogin</maintainer>
         <maintainerurl>https://github.com/onelogin</maintainerurl>
         <section></section>

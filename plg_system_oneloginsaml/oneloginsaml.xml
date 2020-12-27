@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.3" type="plugin" group="user" method="upgrade">
-    <name>plg_user_oneloginsaml</name>
+<extension version="3.3" type="plugin" group="system" method="upgrade">
+    <name>plg_system_oneloginsaml</name>
     <author>OneLogin INC.</author>
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
@@ -16,8 +16,8 @@
         <folder>language</folder>
     </files>
     <languages>
-        <language tag="en-GB">language/en-GB/en-GB.plg_user_oneloginsaml.ini</language>
-        <language tag="en-GB">language/en-GB/en-GB.plg_user_oneloginsaml.sys.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.plg_system_oneloginsaml.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.plg_system_oneloginsaml.sys.ini</language>
     </languages>
     <config>
         <fields name="params">
@@ -83,6 +83,14 @@
                 <field name="onelogin_saml_inject_login" type="radio"
                                        label="PLG_ONELOGIN_SAML_INJECT_LOGIN_LINK_LABEL"
                                        description="PLG_ONELOGIN_SAML_INJECT_LOGIN_LINK_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_force_saml" type="radio"
+                                       label="PLG_ONELOGIN_SAML_FORCE_SAML_LABEL"
+                                       description="PLG_ONELOGIN_SAML_FORCE_SAML_DEC"
                                        default="0"
                 >
                     <option value="0">No</option>

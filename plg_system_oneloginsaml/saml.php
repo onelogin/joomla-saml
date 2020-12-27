@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     OneLogin SAML.Plugin
- * @subpackage  User.oneloginsaml
+ * @subpackage  System.oneloginsaml
  *
  * @copyright   Copyright (C) 2020 OneLogin, Inc. All rights reserved.
  * @license     MIT
@@ -29,12 +29,12 @@ JPluginHelper::importPlugin('system');
 $dispatcher = JEventDispatcher::getInstance();
 $dispatcher->trigger('onAfterInitialise');
 
-$baseUrl = str_replace("plugins/user/oneloginsaml/", "", JUri::root());
+$baseUrl = str_replace("plugins/system/oneloginsaml/", "", JUri::root());
 
 $login_url = $baseUrl.'index.php?option=com_users&view=login';
 $logout_url = $baseUrl.'index.php?option=com_users&task=user.logout';
 
-$oneLoginPlugin = JPluginHelper::getPlugin('user', 'oneloginsaml');
+$oneLoginPlugin = JPluginHelper::getPlugin('system', 'oneloginsaml');
 
 if (!$oneLoginPlugin) {
     throw new Exception("Onelogin SAML Plugin not active");
@@ -52,7 +52,7 @@ if ($oneLoginPlugin && isset($oneLoginPlugin->params)) {
 $saml_joomla = new Saml_Joomla($plgParams, 'onelogin_saml');
 
 if (isset($_GET['metadata'])) {
-    $saml_settings = $saml_joomla->getSamlSettings(true);    
+    $saml_settings = $saml_joomla->getSamlSettings(true);
     $metadata = $saml_settings->getSPMetadata();
     $errors = $saml_settings->validateMetadata($metadata);
     if (empty($errors)) {
@@ -80,31 +80,27 @@ if (isset($_GET['metadata'])) {
 
                 $saml_auth->logout(null, [], $nameId, $sessionIndex, false, $nameIdFormat, $nameIdNameQualifier, $nameIdSPNameQualifier);
             } else {
-                $app->redirect($logout_url);
+                sendMessage($plgParams, $app, $logout_url);
             }
         } else {
-            $app->redirect($baseUrl, "SLO disabled", 'error');
+            sendMessage($plgParams, $app, $baseUrl, "SLO disabled", 'error');
         }
     } else if (isset($_GET['acs'])) {
         $saml_auth->processResponse();
 
         jimport('joomla.user.authentication');
-        $authenticate = JAuthentication::getInstance();
-        $response = new JAuthenticationResponse();
 
         if (!$saml_auth->isAuthenticated()) {
-            $msg_error = 'NO_AUTHENTICATED';
+            $errorMsg = 'NO_AUTHENTICATED';
             $errors = $saml_auth->getErrors();
 
             if (!empty($errors)) {
-                $msg_error .= '<br>'.implode(', ', $errors);
+                $errorMsg .= '<br>'.implode(', ', $errors);
                 if ($plgParams->get('onelogin_saml_advanced_settings_debug')) {
-                    $msg_error .= '<br>'.$saml_auth->getLastErrorReason();
+                    $errorMsg .= '<br>'.$saml_auth->getLastErrorReason();
                 }
             }
-            $response->status = JAuthentication::STATUS_FAILURE;
-            $response->message = $msg_error;
-            $app->redirect($login_url, $response->message, 'error');
+            sendMessage($plgParams, $app, $login_url, $errorMsg, 'error');
         }
         $attrs = $saml_auth->getAttributes();
 
@@ -139,14 +135,12 @@ if (isset($_GET['metadata'])) {
         $matcher = $plgParams->get('onelogin_saml_account_matcher', 'username');
 
         if (empty($username) && $matcher == 'username') {
-            $response->status = JAuthentication::STATUS_FAILURE;
-            $response->message = 'NO_USERNAME';
-            $app->redirect($login_url, $response->message, 'error');
+            $errorMsg = 'NO_USERNAME';
+            sendMessage($plgParams, $app, $login_url, $errorMsg, 'error');
         }
         if (empty($email) && $matcher == 'mail') {
-            $response->status = JAuthentication::STATUS_FAILURE;
-            $response->message = 'NO_MAIL';
-            $app->redirect($login_url, $response->message, 'error');
+            $errorMsg = 'NO_MAIL';
+            sendMessage($plgParams, $app, $login_url, $errorMsg, 'error');
         }
 
         $result = $saml_joomla->get_user_from_joomla($matcher, $username, $email);
@@ -183,9 +177,8 @@ if (isset($_GET['metadata'])) {
 
                 if ($return === false || !isset($result)) {
                     $errors = $model->getErrors();
-                    $response->status = JAuthentication::STATUS_FAILURE;
-                    $response->message = 'USER NOT EXISTS AND FAILED THE CREATION PROCESS';
-                    $app->redirect($login_url, $response->message, 'error');
+                    $errorMsg = 'USER NOT EXISTS AND FAILED THE CREATION PROCESS. '.implode(", ", $errors);
+                    sendMessage($plgParams, $app, $login_url, $errorMsg, 'error');
                 }
 
                 $user = JUser::getInstance($result->id);
@@ -193,7 +186,6 @@ if (isset($_GET['metadata'])) {
                 $user->set('block', '0');
                 $user->set('activation', '');
                 $user->save();
-
 
                 $groups = $saml_joomla->get_mapped_groups($saml_groups);
                 if (empty($groups)) {
@@ -206,17 +198,15 @@ if (isset($_GET['metadata'])) {
                 $user->set('groups', $groups);
                 $user->save();
 
-                $response->status == JAuthentication::STATUS_SUCCESS;
                 $session->set('user', $user);
 
                 // SSO SAML Login flag
                 $session->set('saml_login', 1);
 
-                $app->redirect($login_url, "Welcome $user->username", 'message');
+                sendMessage($plgParams, $app, $login_url, "Welcome $user->username", 'message');
             } else {
-                $response->status = JAuthentication::STATUS_FAILURE;
-                $response->message = 'USER DOES NOT EXIST AND NOT ALLOWED TO CREATE';
-                $app->redirect($login_url, $response->message, 'error');
+                $errorMsg = 'USER DOES NOT EXIST AND NOT ALLOWED TO CREATE';
+                sendMessage($plgParams, $app, $login_url, $errorMsg, 'error');
             }
         } else {
             $user = JUser::getInstance($result->id);
@@ -238,7 +228,6 @@ if (isset($_GET['metadata'])) {
                 }
             }
 
-            $response->status == JAuthentication::STATUS_SUCCESS;
             $session->set('user', $user);
 
             // SSO SAML Login flag
@@ -259,7 +248,7 @@ if (isset($_GET['metadata'])) {
             $nameIdSPNameQualifier = $saml_auth->getNameIdSPNameQualifier();
             $session->set('saml_nameid_spnamequalifier', $nameIdSPNameQualifier);
 
-            $app->redirect($login_url, "Welcome $user->username", 'message');
+            sendMessage($plgParams, $app, $login_url, "Welcome $user->username", 'message');
         }
 
     } else if (isset($_GET['sls'])) {
@@ -269,18 +258,35 @@ if (isset($_GET['metadata'])) {
                 $saml_auth->processSLO();
                 $errors = $saml_auth->getErrors();
                 if (empty($errors)) {
-                    // TODO Do local logout
-                    $app->redirect($login_url, 'Sucessfully logged out', 'message');
+                    sendMessage($plgParams, $app, $login_url, 'Sucessfully logged out', 'message');
                 } else {
-                    $app->redirect($login_url, implode(', ', $errors), 'error');
+                    sendMessage($plgParams, $app, $login_url, implode(', ', $errors), 'error');
                 }
             } else {
-                $app->redirect($logout_url);
+                sendMessage($plgParams, $app, $logout_url);
             }
         } else {
-            $app->redirect($baseUrl, "SLO disabled", 'error');
+            sendMessage($plgParams, $app, $baseUrl, "SLO disabled", 'error');
         }
     } else {
         throw new Exception("No action selected, set one of those GET parameters: 'sso', 'slo', 'acs', 'sls' or 'metadata' .");
+    }
+}
+
+
+function sendMessage($plgParams, $app, $url, $message=null, $type=null) {
+    if (!empty($message)) {
+        $app->enqueueMessage($message, $type);
+    }
+
+    if ($type == "error" && $plgParams->get('onelogin_saml_force_saml')) {
+        if (empty($message)) {
+            echo 'SAML Error';
+        } else {
+            echo $message;
+        }
+        exit();
+    } else {
+        $app->redirect($url);
     }
 }

@@ -21,6 +21,8 @@ Features
 * Just on time provisioning
 * Supports groups
 * User and Admin Logins
+* SAML Login Link injection
+* Force SAML Login
 
 
 Pre-requisites
@@ -46,50 +48,28 @@ At the "Description" tab you will find info describing the rest of the tabs. Onc
 
 The metadata of the Joomla SP will be available at
 ``` 
-http://<path to joomla/plugins/user/oneloginsaml/oneloginsaml.php?metadata
+http://<path to joomla/plugins/system/oneloginsaml/oneloginsaml.php?metadata
 ```
 and for the Backend:
 ``` 
-http://<path to joomla/plugins/user/oneloginsaml_backend/oneloginsaml_backend.php?metadata
+http://<path to joomla/plugins/system/oneloginsaml_backend/oneloginsaml_backend.php?metadata
 ```
 
-How to add "SAML Login" link to the User Login
-----------------------------------------------
+Inject SAML Link
+----------------
 
-The "SAML Login" link can be added in at least 2 different places:
-
-* Add the link to the "Login Form module". At the admin interface, click on Extensions > Module Manager and search the
-   word "Login", in the result you can find the active modules that currently are rendering a Login Form. Edit them and in the
-   pre-text add the following:
-
-```
-   <a href="http://<path to joomla>/plugins/user/oneloginsaml/oneloginsaml.php?sso">SAML Login</a>
-```
-
-* The SAML Link at the main login form is handled by a flag of the option section of the OneLogin plugin
+In the Option section, there is a flag that you can enable in
+order to inject a SAML Link 
 
 
-How to add "SAML Login" link to the Admin Login
------------------------------------------------
+Force SAML Login
+----------------
 
-At the admin interface, click on Extensions > Templates > Template. Switch to the Administrator templates. Select
-the one you are using. Edit the login.php file:
+You can force users and admins to execute SAML logins by enabling a flag at the Option section.
 
-After the line 122:
-```
-<jdoc:include type="component" />
-```
-Add:
-```
-<?php echo '<div ><center><hr><a class="btn btn-primary" href="'.JRoute::_(JUri::root().'plugins/user/oneloginsaml_backend/oneloginsaml_backend.php?sso', true).'">SAML Login</a><hr></center></div>'; ?>
-```
+When this flag is enabled, if users try to access any Joomla
+view and there is no session, it will be redirected to the IdP.
 
-
-Local Login
------------
-
-When SAML enabled, you can always continue login through other login backends.
-Maybe we will disable the local login in future but will provide a way to rescue the system in case that something go wrong with SAML.
 
 Contributors
 ------------

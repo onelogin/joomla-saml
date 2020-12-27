@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     OneLogin SAML.Plugin
- * @subpackage  User.oneloginsaml
+ * @subpackage  System.oneloginsaml
  *
  * @copyright   Copyright (C) 2020 OneLogin, Inc. All rights reserved.
  * @license     MIT
@@ -12,7 +12,7 @@ if (!defined('_JEXEC')) {
 } else {
     require_once JPATH_LIBRARIES.'/onelogin/loader.php';
 
-    class PlgUserOneloginsaml extends JPlugin
+    class PlgSystemOneloginsaml extends JPlugin
     {
         public function onUserLogout($parameters, $options)
         {
@@ -33,11 +33,21 @@ if (!defined('_JEXEC')) {
             }
         }
 
-        // It seems that the mod_login content is printed 
-        // sometimes without execute that render, so the SAML Link will need to be added manually
-/*
+        public function onAfterInitialise() {
+            if (JFactory::getUser()->guest && JFactory::getApplication()->isSite()) {
+                if ($this->params->get('onelogin_saml_force_saml')) {
+                    $response = new JAuthenticationResponse();
+                    if (empty($response->error_message)) {
+                        $ssoUrl = JRoute::_(JUri::root().'plugins/system/oneloginsaml/oneloginsaml.php?sso', true);
+
+                        JFactory::getApplication()->redirect($ssoUrl);
+                    }
+                }
+            }
+        }
+
         public function onRenderModule(&$module, &$attribs) {
-            if (JFactory::getUser()->guest) {
+            if (JFactory::getUser()->guest && JFactory::getApplication()->isSite()) {
                 if ($this->params->get('onelogin_saml_inject_login')) {
                     if ($module->module == "mod_login") {
                         $link = $this->getSSOLinkAndText();
@@ -48,11 +58,10 @@ if (!defined('_JEXEC')) {
                 }
             }
         }
-*/
 
         public  function onContentPrepareForm($form, $data)
         {
-            if (JFactory::getUser()->guest) {
+            if (JFactory::getUser()->guest && JFactory::getApplication()->isSite()) {
                 if ($this->params->get('onelogin_saml_inject_login')) {
                     $app    = JFactory::getApplication();
                     $option = $app->input->get('option');
@@ -78,7 +87,7 @@ if (!defined('_JEXEC')) {
         }
 
         public function getSSOLinkAndText() {
-            $ssoUrl = JRoute::_(JUri::root().'plugins/user/oneloginsaml/oneloginsaml.php?sso', true);
+            $ssoUrl = JRoute::_(JUri::root().'plugins/system/oneloginsaml/oneloginsaml.php?sso', true);
 
             $link_text = $this->params->get('onelogin_saml_link_text');
             if (empty($link_text)) {
