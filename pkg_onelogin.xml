@@ -17,7 +17,7 @@
     <update>https://github.com/onelogin/joomla-saml</update>
     <files>
         <file type="library" id="onelogin" >onelogin.zip</file>
-        <file type="plugin" id="plg_user_oneloginsaml" group="user">plg_user_oneloginsaml.zip</file>
-        <file type="plugin" id="plg_user_oneloginsaml_backend" group="user">plg_user_oneloginsaml_backend.zip</file>
+        <file type="plugin" id="plg_system_oneloginsaml" group="system">plg_system_oneloginsaml.zip</file>
+        <file type="plugin" id="plg_system_oneloginsaml_backend" group="system">plg_system_oneloginsaml_backend.zip</file>
     </files>
 </extension>

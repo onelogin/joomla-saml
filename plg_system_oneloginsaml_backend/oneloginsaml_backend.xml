@@ -102,6 +102,12 @@
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </field>
+                <field name="onelogin_saml_backend_link_text" type="text"
+                                       label="PLG_ONELOGIN_SAML_BACKEND_LINK_TEXT_LABEL"
+                                       description="PLG_ONELOGIN_SAML_BACKEND_LINK_TEXT_DEC"
+                                       size="40"
+                                       default="SAML SSO"
+                />
                 <field name="onelogin_saml_backend_force_saml" type="radio"
                                        label="PLG_ONELOGIN_SAML_BACKEND_FORCE_SAML_LABEL"
                                        description="PLG_ONELOGIN_SAML_BACKEND_FORCE_SAML_DEC"
