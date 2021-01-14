@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  @copyright   Copyright (C) 2020 OneLogin, Inc. All rights reserved.
+ *  @copyright   Copyright (C) 2021 OneLogin, Inc. All rights reserved.
  *  @license     MIT
  */
 

@@ -3,7 +3,7 @@
  * @package     OneLogin SAML.Plugin
  * @subpackage  System.oneloginsaml
  *
- * @copyright   Copyright (C) 2020 OneLogin, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2021 OneLogin, Inc. All rights reserved.
  * @license     MIT
  */
 
@@ -34,8 +34,13 @@ if (!defined('_JEXEC')) {
         }
 
         public function onAfterInitialise() {
+            $skipForceSamlWord = $this->params->get('onelogin_saml_force_saml_skip_world');
+            if (empty($skipForceSamlWord)) {
+                $skipForceSamlWord = 'normal';
+            }
+
             if (JFactory::getUser()->guest && JFactory::getApplication()->isSite()) {
-                if ($this->params->get('onelogin_saml_force_saml')) {
+                if ($this->params->get('onelogin_saml_force_saml') && !((isset($_GET[$skipForceSamlWord]) || isset($_POST['username'])))) {
                     $response = new JAuthenticationResponse();
                     if (empty($response->error_message)) {
                         $ssoUrl = JRoute::_(JUri::root().'plugins/system/oneloginsaml/oneloginsaml.php?sso', true);

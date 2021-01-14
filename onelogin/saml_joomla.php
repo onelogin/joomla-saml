@@ -2,7 +2,7 @@
 /**
  * @package     OneLogin SAML.Library
  *
- * @copyright   Copyright (C) 2020 OneLogin, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2021 OneLogin, Inc. All rights reserved.
  * @license     MIT
  */
 
@@ -116,6 +116,8 @@ class Saml_Joomla {
                 'signatureAlgorithm' => $this->get_config_parameter('advanced_settings_signature_algorithm', 'http://www.w3.org/2000/09/xmldsig#rsa-sha1'),
                 // Algorithm that the toolkit will use on digest process.
                 'digestAlgorithm' => $this->get_config_parameter('advanced_settings_digest_algorithm', 'http://www.w3.org/2000/09/xmldsig#sha1'),
+
+                'lowercaseUrlencoding' => $this->get_config_parameter('retrieve_params_from_server')
             ],
         ];
     }

@@ -3,7 +3,7 @@
  * @package     OneLogin SAML.Plugin
  * @subpackage  System.oneloginsaml_backend
  *
- * @copyright   Copyright (C) 2020 OneLogin, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2021 OneLogin, Inc. All rights reserved.
  * @license     MIT
  */
 
@@ -298,17 +298,15 @@ if (isset($_GET['metadata'])) {
         if ($plgParams->get('onelogin_saml_backend_slo')) {
             $session = JFactory::getSession();
             if ($session->get('saml_backend_login')) {
-                $saml_auth->processSLO();
+                $retrieveParametersFromServer = $plgParams->get('onelogin_saml_backend_retrieve_params_from_server');
+                $saml_auth->processSLO(false, null, $retrieveParametersFromServer);
                 $errors = $saml_auth->getErrors();
                 if (empty($errors)) {
-                    // TODO Do local logout
+                    // TODO Improve local logout and do it
+                    // manually instead allow php-saml close it
                     sendMessage($plgParams, $app, $login_url, 'Sucessfully logged out', 'message');
                 } else {
-                    $errorMsg = implode(', ', $errors);
-                    if ($plgParams->get('onelogin_saml_backend_advanced_settings_debug')) {
-                        $errorMsg .= '<br>'.$saml_auth->getLastErrorReason();
-                    }
-                    sendMessage($plgParams, $app, $login_url, $errorMsg, 'error');
+                    sendMessage($plgParams, $app, $login_url, implode(', ', $errors), 'error');
                 }
             } else {
                 sendMessage($plgParams, $app, $logout_url);

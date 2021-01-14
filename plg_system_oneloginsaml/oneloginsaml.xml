@@ -4,8 +4,8 @@
     <author>OneLogin INC.</author>
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
-    <creationDate>December 2020</creationDate>
-    <copyright>Copyright (C) 2014-2020 Onelogin Inc. All rights reserved.</copyright>
+    <creationDate>January 2021</creationDate>
+    <copyright>Copyright (C) 2014-2021 Onelogin Inc. All rights reserved.</copyright>
     <license>MIT</license>
     <version>2.0.0</version>
     <description>PLG_ONELOGIN_SAML_XML_DESCRIPTION</description>
@@ -71,7 +71,7 @@
                 >
                     <option value="0">No</option>
                     <option value="1">Yes</option>
-                </field>
+                </field>                
                 <field name="onelogin_saml_account_matcher" type="radio"
                                        label="PLG_ONELOGIN_SAML_ACCOUNT_MATCHER_LABEL"
                                        description="PLG_ONELOGIN_SAML_ACCOUNT_MATCHER_DEC"
@@ -101,6 +101,12 @@
                 >
                     <option value="0">No</option>
                     <option value="1">Yes</option>
+                </field>
+                <field name="onelogin_saml_force_saml_skip_world" type="text"
+                                       label="PLG_ONELOGIN_SAML_FORCE_SAML_SKIP_LABEL"
+                                       description="PLG_ONELOGIN_SAML_FORCE_SAML_SKIP_DEC"
+                                       default="normal"
+                >
                 </field>
             </fieldset>
             <fieldset name="attrs_mapping">
@@ -433,6 +439,14 @@
                     <option value="http://www.w3.org/2001/04/xmlenc#sha256">sha256</option>
                     <option value="http://www.w3.org/2001/04/xmldsig-more#sha384">sha384</option>
                     <option value="http://www.w3.org/2001/04/xmlenc#sha512">sha512</option>
+                </field>
+                <field name="onelogin_saml_retrieve_params_from_server" type="radio"
+                                       label="PLG_ONELOGIN_SAML_RETRIEVE_FROM_SERVER_LABEL"
+                                       description="PLG_ONELOGIN_SAML_RETRIEVE_FROM_SERVER_DEC"
+                                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
                 </field>
             </fieldset>
 <!--
