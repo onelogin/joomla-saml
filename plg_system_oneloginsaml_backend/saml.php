@@ -306,8 +306,9 @@ if (isset($_GET['metadata'])) {
                     // manually instead allow php-saml close it
                     sendMessage($plgParams, $app, $login_url, 'Sucessfully logged out', 'message');
                 } else {
+                    $errorMsg = 'Not logged out';
                     $errorMsg .= '<br>'.implode(', ', $errors);
-                    if ($plgParams->get('onelogin_saml_advanced_settings_debug')) {
+                    if ($plgParams->get('onelogin_saml_backend_advanced_settings_debug')) {
                         $errorMsg .= '<br>'.$saml_auth->getLastErrorReason();
                     }
                     sendMessage($plgParams, $app, $login_url, $errorMsg, 'error');

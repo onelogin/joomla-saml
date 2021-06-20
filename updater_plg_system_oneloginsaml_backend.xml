@@ -21,9 +21,9 @@ push a new release as an update to the general public.
         <tags>
             <tag>stable</tag>
         </tags>
-        <sha256>8bee93c21dc0e241afba858d66a55ec90add730bf8a8e5b04d79e0c6ce0b50e7</sha256>
-        <sha384>cb40b60aea24099ba6dc1449a3c5c0f1b527d1008b79096f5326a4b06780cba7152f0c742c3a6115584c24ca91c4065a</sha384>
-        <sha512>f3529e163f2d2ff0bce8c56efc00f3d3f46c588bd427d8fbfdc1415e620990b8d1d52f7e95ee9a2f5bd0a9bf66967b85a45c56bd389f10ee955ce8d7c3aebbb6</sha512>
+        <sha256>b12e1324f613397f0ce1f970cbe021129f2e462b84ca491ef1fef591f8fe8752</sha256>
+        <sha384>df0d39ae8c015dde8016168b4cd8828b0983f509de6a0ec7d13fd59d3677c822f2714a05bf5cba5624f97ea07ba823e4</sha384>
+        <sha512>a3bb4b37c13f8294f0bf087130f20a8133d5a92b4d74eeea4f30ee8a039af3303943bdaf9b907a2272471ce37b47273c6624eb424f45a9228cbb4f8dc6292d8f</sha512>
         <maintainer>OneLogin</maintainer>
         <maintainerurl>https://github.com/onelogin</maintainerurl>
         <section></section>
