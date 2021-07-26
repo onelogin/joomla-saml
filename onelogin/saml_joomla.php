@@ -156,7 +156,8 @@ class Saml_Joomla {
     }
 
     function get_mapped_groups($saml_groups) {
-        $prefix = '';
+        /*
+		$prefix = '';
         if ($this->plugin == 'onelogin_saml_backend') {
             $prefix = 'onelogin_saml_backend_';
             $max = 11;
@@ -195,5 +196,32 @@ class Saml_Joomla {
         }
 
         return array_unique($groups);
+		*/
+		
+		$prefix = '';
+        if ($this->plugin == 'onelogin_saml_backend') {
+			$mappings = $params->get(onelogin_saml_backend_.'mappings');
+        } else {
+			$mappings = $params->get('mappings');
+		}
+		
+		
+		$arr = (array) $mappings;
+		
+		$groups = array();
+		$i=0;
+
+		foreach ($arr as $value)
+		{
+			if (!empty($value->group) and !empty(trim($value->group)) ) {
+				$groups[$i]['group'] = $value->group;
+				$groups[$i]['group_map'] = $value->group_map;
+			}
+
+			$i++;
+		}
+		
+		return array_unique($groups);
+		
     }
 }

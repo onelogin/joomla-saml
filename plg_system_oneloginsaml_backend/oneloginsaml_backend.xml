@@ -150,106 +150,29 @@
                 />
             </fieldset>
             <fieldset name="group_mapping">
-                <field name="onelogin_saml_backend_group1" type="usergroup"
-                                       label="Group1"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group1_map" type="text"
-                                       label="Group1 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group2" type="usergroup"
-                                       label="Group2"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group2_map" type="text"
-                                       label="Group2 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group3" type="usergroup"
-                                       label="Group3"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group3_map" type="text"
-                                       label="Group3 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group4" type="usergroup"
-                                       label="Group4"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group4_map" type="text"
-                                       label="Group4 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group5" type="usergroup"
-                                       label="Group5"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group5_map" type="text"
-                                       label="Group5 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group6" type="usergroup"
-                                       label="Group6"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group6_map" type="text"
-                                       label="Group6 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group7" type="usergroup"
-                                       label="Group7"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group7_map" type="text"
-                                       label="Group7 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group8" type="usergroup"
-                                       label="Group8"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group8_map" type="text"
-                                       label="Group8 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group9" type="usergroup"
-                                       label="Group9"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group9_map" type="text"
-                                       label="Group9 Mapping"
-                                       size="40"
-                                       default=""
-                />
-                <field name="onelogin_saml_backend_group10" type="usergroup"
-                                       label="Group10"
-                                       multiple="false"
-                                       default="7"
-                />
-                <field name="onelogin_saml_backend_group10_map" type="text"
-                                       label="Group10 Mapping"
-                                       size="40"
-                                       default=""
-                />
+               	<field
+				name="mappings"
+				type="subform"
+				default=''
+				label="Group mapping"
+				description=""
+				multiple="true"
+				min="0"
+				max="50"
+				>
+				<form>
+					<field name="group" 
+						type="usergroup"
+						label="Group"
+						multiple="false"
+					/>
+					<field name="group_map" 
+						type="text"
+						label="Group Mapping"
+						size="40"
+						default=""
+					/>
+				</form>
             </fieldset>
             <fieldset name="advanced">
                 <field name="onelogin_saml_backend_advanced_settings_debug" type="radio"
